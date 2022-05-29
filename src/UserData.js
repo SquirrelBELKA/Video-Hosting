@@ -1,5 +1,5 @@
 
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from '@material-ui/core/styles';
 import { 
     Table,
@@ -9,6 +9,7 @@ import {
     TableHead,
     TableRow,
     Paper,
+    Button,
     Avatar,
     Grid,
     Typography,
@@ -16,7 +17,33 @@ import {
     TableFooter
  } from '@material-ui/core';
  import { indigo } from '@mui/material/colors';
- 
+ import { Link } from "react-router-dom";
+import { set } from "react-hook-form";
+import { styled } from '@mui/material/styles';
+import  { tableCellClasses } from '@mui/material/TableCell';
+
+
+
+
+
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: color,
+    color: theme.palette.common.white,
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+  },
+}));
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
 
  const color = indigo[300];
  const useStyles = makeStyles((theme) => ({
@@ -66,18 +93,21 @@ for(let i=0;i<14;i++) {
  function UserData(props) {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(5);
     const { emails } = props
    //данные полученные с сервера
+    
+    
+    
 
-   const handleChangePage = (event, newPage) => {
+    const handleChangePage = (event, newPage) => {
     setPage(newPage);
-  };
+    };
 
-  const handleChangeRowsPerPage = (event) => {
+    const handleChangeRowsPerPage = (event) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
-  };
+     };
 
     if (!emails || emails.length === 0) return <p>Нет данных.</p>
 
@@ -86,66 +116,56 @@ for(let i=0;i<14;i++) {
     <TableContainer component={Paper} className={classes.tableContainer}>
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
+          
           <TableRow>
-          <TableCell className={classes.tableHeaderCell}>Отправитель</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Тема</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Вложения</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Дата</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Мессенджер/Почта</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Ссылка на письмо</TableCell>
-            <TableCell className={classes.tableHeaderCell}>Статус</TableCell>
+            <StyledTableCell> <Typography >Тема</Typography></StyledTableCell>
+            <StyledTableCell> <Typography >От кого</Typography></StyledTableCell>
+            <StyledTableCell> <Typography >Кому</Typography></StyledTableCell>
+            <StyledTableCell> <Typography >Время получения</Typography></StyledTableCell>
+            <StyledTableCell> <Typography >Откуда отправлено</Typography></StyledTableCell>
+          {/*
+            <TableCell>Категория</TableCell> 
+          */}
+            <StyledTableCell><Typography >Подробнее</Typography>  </StyledTableCell>
           </TableRow>
         </TableHead>
+
         <TableBody>
-                    {
-                        //проверка наличия данных с сервера
-                        //map проходит по массиву с людьми, для каждого строка
-                        emails.map((key, email) =>
-                        (
-                            <TableRow key={key}>
-                              <TableCell>
-                                  <Grid container>
-                                      <Grid item lg={2}>
-                                          <Avatar alt={email.from} src='.' className={classes.avatar}/>
-                                      </Grid>
-                                      <Grid item lg={10}>
-                                          <Typography className={key}>{email.id}</Typography>
-                                          <Typography color="textSecondary" variant="body2">{email.from}</Typography>
-                                      </Grid>
-                                  </Grid>
-                                </TableCell>
-                                <TableCell>
-                                  <Typography color="primary" variant="subtitle2">{email.subject}</Typography>
-                                </TableCell>
-                                <TableCell>
-                                  <Typography color="textSecondary" variant="body2">{email.file}</Typography>
-                                </TableCell>
-                                <TableCell>{email.date}</TableCell>
-                                <TableCell>
-                                  <Typography color="primary" variant="subtitle2">{email.messageType}</Typography>
-                                </TableCell>
-                                <TableCell>
-                                  <Typography color="primary" variant="subtitle2">{email.userId}</Typography>
-                                </TableCell>
-                                
-                                <TableCell>
-                  <Typography 
-                    className={classes.status}
-                    style={{
-                        backgroundColor: 
-                        ((email.status === 'Active' && 'green') ||
-                        (email.status === 'Pending' && 'blue') ||
-                        (email.status === 'Blocked' && 'orange'))
-                    }}
-                  >{email.status}</Typography>
-                </TableCell>
-                               
-                              
-             </TableRow>
-          ))}
+          {
+            emails.map((email, index) => {
+              return (
+                <StyledTableRow key="index">
+                  <TableCell> {email.subject}</TableCell>
+                  <TableCell>{email.from}</TableCell>
+                  <TableCell>{email.to}</TableCell>
+                  <TableCell>{email.date}</TableCell>
+                  <TableCell>
+                  <Typography color="primary" variant="subtitle2">{email.messageType}</Typography>
+                    </TableCell>
+                  {/* <TableCell>{email.categories}</TableCell> */}
+                  <TableCell>
+                    
+                    <Button   component={Link} to={"/podrobnee/" + email.id}
+                         variant="text"
+                         type="submit" >
+                                   Подробнее
+                     </Button> 
+                     <Button   component={Link} to="/newpochta"
+                         variant="contained"
+                         color="primary"
+                         type="submit" >
+                          Отправить ответ
+                     </Button>
+                  </TableCell>
+                </StyledTableRow>
+              )
+            }
+            )
+          }
         </TableBody>
+        
         <TableFooter>
-        {/* <TablePagination
+        <TablePagination
             rowsPerPageOptions={[5, 10, 15]}
             component="div"
             count={USERS.length}
@@ -153,8 +173,10 @@ for(let i=0;i<14;i++) {
             page={page}
             onChangePage={handleChangePage}
             onChangeRowsPerPage={handleChangeRowsPerPage}
-        /> */}
+        />
         </TableFooter>
+
+
       </Table>
     </TableContainer>
   );

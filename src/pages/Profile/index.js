@@ -37,15 +37,31 @@ function Profile() {
     resolver: yupResolver(validationSchema),
   });
 
+  const updateAppPassword = async (data) =>{
+    let user = {
+      userId: data.userId,
+      appPassword: data.appPassword,
+      
+    }
+
+    const { data: Passuser } = await api.auth.appPassword(user);
+    
+  }
+ 
   const onSubmit = async (data) => {
     try {
       setIsLoading(true);
-      const { data: user } = await api.auth.updateProfile(data);
+      const { data: Passuser } = await api.auth.appPassword(data);
       
+      console.log(Passuser)
+      let user = {
+        userId: Passuser.userId,
+        appPassword: Passuser.appPassword,
+        
+      }
       
-      
-      
-
+      console.log(data);
+      alert( "Добавлено!" );
       auth.setUser(user);
       setIsOpen(true);
     } catch (e) {
@@ -62,12 +78,14 @@ function Profile() {
     }
   };
 
+
+  
   const loadData = useCallback(async () => {
     const { data } = await api.auth.getProfile();
-
     reset({
       email: data.email,
-      emailpassword: data.appPassword,
+      userId: data.id,
+      appPassword: data.appPassword,
       firstName: data.firstName,
       lastName: data.lastName,
     });
@@ -85,7 +103,7 @@ function Profile() {
           <Typography variant="h6">Данные пользователя</Typography>
         </Grid>
       </Grid>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(updateAppPassword)}>
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Controller
@@ -107,17 +125,17 @@ function Profile() {
 
           <Grid item xs={12}>
             <Controller
-              name="emailpassword"
+              name="appPassword"
               control={control}
               defaultValue=""
               render={({ field }) => (
                 <TextField
                   {...field}
-                  error={Boolean(errors.emailpassword?.message)}
+                  error={Boolean(errors.appPassword?.message)}
                   fullWidth={true}
-                  label="Введите пароль от почты"
+                  label="Введите  внешний пароль от почты"
                   variant="filled"
-                  helperText={errors.emailpassword?.message}
+                  helperText={errors.appPassword?.message}
                 />
               )}
             />

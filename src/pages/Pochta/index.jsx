@@ -4,38 +4,7 @@ import React, { useEffect, useState } from 'react';
 import LoadingPersonsData from '..//../OnLoadingPersonsData'
 import Cookies from "js-cookie";
 
-/*class Pochta extends React.Component { 
-    state = {pochtas: [] , emails:[] }
-    //emails= JSON.stringify(emails);
-    pageNumber = 0;
-    sizeNumber = 20;
 
-    constructor() {
-         super();
-        this.setState = {emails:EmailService.getEmails()}
-        this.getPochta()
-    } */
-//getEmails(userId){
-  //return axios.get("http://localhost:8080/api/v1/email/")
-  //.then(response=>{
-    //  response.data.emails
-  //})
-
-  //getPochta = async () => {
-   // try {
-     //   let data = await api.get('/',{
-            // headers: {
-            //     Authorization: 'Bearer ' + localStorage.getItem('token')
-            // },
-       //     params: {
-         //   page: this.pageNumber,
-          //  size: this.sizeNumber
-      //  }}).then(({data}) => data);
-     //   this.setState({pochtas: data})
-    //} catch (err) {
-     //   console.log(err)
-   // }
-//}
 
 function Pochta() {
 
