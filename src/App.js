@@ -13,9 +13,19 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react';
 import LoadingPersonsData from './OnLoadingPersonsData'
 import { indigo } from '@mui/material/colors';
- 
+import ButtonBase from '@mui/material/ButtonBase';
+import { styled } from '@mui/material/styles';
 
  const color = indigo[400];
+ const colorb = '#232323';
+ const coloro = '#2F2F2F';
+
+ const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
 
 
 
@@ -30,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(2),
   },
   abRoot: {
-    backgroundColor: color,
+    backgroundColor: coloro,
   },
   
 }));
@@ -48,13 +58,6 @@ function App() {
  
   
 
-  //auth.isLoaded(true);
-  //useEffect(() => { 
-
-    //const tokenData=Cookies.get('auth-token');
-    
-    //dispatch(setAuthToken(tokenData));
-  //}, []);
 
   return (
     <div className={classes.root}>
@@ -63,22 +66,32 @@ function App() {
     
   }} >
         <Toolbar>
+        <ButtonBase sx={{ width: 100, height:100 }}>
+            <Img  src="https://ibb.org.ru/images/2023/12/05/3b1f78cc-d232-46ad-9602-f94f75e9ee98-transformed.png" />
+          </ButtonBase><Button color="inherit" component={Link} to="/">
           <Typography variant="h6" className={classes.title}>
-            Цифровой помощник
-          </Typography>
+          
+            ТИНОСТУДИЯ
+            
+          </Typography></Button>
           <div className={classes.rightToolbar}>
+          
             <Button color="inherit" component={Link} to="/">
-              Главная
+              
             </Button>
+            
+
+            
             
           </div>
           {auth.isLoaded &&
             (auth.user ? (
               <>
-              <Button color="inherit" component={Link} to="/pochta">
-                Почта
-                  </Button>
-                <Button color="inherit" component={Link} to="/profile">
+              <Button color="inherit" component={Link} to="/video">
+              Видео
+            </Button>
+              
+                <Button color="inherit" component={Link} to="/statistics">
                   {auth.user.firstName} {auth.user.lastName} Профиль
                 </Button>
                 <Button color="inherit" onClick={onLogOut}>
@@ -88,6 +101,7 @@ function App() {
               </>
             ) : (
               <>
+              
                 <Button color="inherit" component={Link} to="/login">
                   Вход
                 </Button>

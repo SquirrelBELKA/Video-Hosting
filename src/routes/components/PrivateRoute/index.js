@@ -6,7 +6,7 @@ function PrivateRoute({ children }) {
   const location = useLocation();
   const url = new URLSearchParams();
   url.set("redirect", location.pathname + location.search);
-//при успещном входе перенаправление на страницу профиль
+//при успешном входе перенаправление на страницу профиль
   return auth.user ? (
     children
   ) : (

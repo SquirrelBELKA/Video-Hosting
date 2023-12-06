@@ -1,11 +1,9 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "../../pages/Home";
+import Video from "../../pages/Home/Video";
+import Statistics from "../../pages/Home/Statistics";
 import Login from "../../pages/Login";
 import Registration from "../../pages/Registration";
-import Profile from "../../pages/Profile";
-import Pochta from "../../pages/Pochta";
-import NewPochta from "../../pages/Pochta/NewPochta";
-import Podrobnee from "../../pages/Pochta/Podrobnee";
 import NotFound from "../../pages/NotFound";
 import useAuth from "../../hooks/useAuth";
 import PrivateRoute from "../components/PrivateRoute";
@@ -30,14 +28,7 @@ function AppRoutes() {
   return auth.isLoaded ? (
     <Routes>
        <Route path="/" element={<Home />} />
-        <Route
-         path="/profile"
-         element={
-          <PrivateRoute>
-            <Profile />
-          </PrivateRoute>
-         }
-        />
+        
          <Route
          path="/login"
          element={
@@ -50,34 +41,26 @@ function AppRoutes() {
          path="/registration"
          element={
           <GuestRoute>
-            <Registration />
+            <Registration />  
           </GuestRoute>
          }
         />
-         <Route
-          path="/pochta"
+        
+         
+          <Route
+          path="/video"
           element={
           <PrivateRoute>
-            <Pochta />
+            <Video />
           </PrivateRoute>
-          }
-         />
-         <Route
-          path="/newpochta"
+          }/>
+           <Route
+          path="/statistics"
           element={
           <PrivateRoute>
-            <NewPochta />
+            <Statistics />
           </PrivateRoute>
-          }
-         />
-         <Route
-          path="/podrobnee/:id"
-          element={
-          <PrivateRoute>
-            <Podrobnee />
-          </PrivateRoute>
-          }
-         />
+          }/>
 
       <Route path="/not-found-404" element={<NotFound />} />
       <Route path="**" element={<Navigate to="/not-found-404" />} />
@@ -94,3 +77,4 @@ function AppRoutes() {
 }
 
 export default AppRoutes;
+//<Registration />  

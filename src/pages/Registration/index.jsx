@@ -17,8 +17,19 @@ import Box from '@material-ui/core/Box';
 import Avatar from '@material-ui/core/Avatar';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import {indigo } from '@mui/material/colors';
+import Paper from "@mui/material/Paper";
+import { styled } from '@mui/material/styles';
 
 const color = indigo[300];
+const colorb = '#232323';
+const colorw = '#FAFAFA';
+const Img = styled('img')({
+  margin: 'auto',
+  display: 'block',
+  maxWidth: '100%',
+  maxHeight: '100%',
+});
+
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(3),
@@ -84,15 +95,24 @@ function Registration() {
   };
 
   return (
+    <div style={{backgroundColor: colorb}}> <br /><br /><br /><br />
+    <Paper elevation={7}
+      sx={{ 
+        p: 2.5,
+        
+        margin: 'auto',
+        maxWidth:500,
+        flexGrow: 1,
+        backgroundColor: colorw
+      }}
+    >
     <Container maxWidth="xs" className={classes.root}>
-      <Box  pt={10}></Box>
-      <Avatar className={classes.avatar}>
-        <LockOutlinedIcon/>
-        </Avatar>
+    <Img  src="https://ibb.org.ru/images/2023/12/06/SNIMOK-EKRANA-2023-12-06-114326.jpg" />
+            <br /><br />
+    
+
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Typography variant="h6">Регистрация</Typography>
-        </Grid>
+        
       </Grid>
       <form onSubmit={handleSubmit(onSubmit)}>
         <Grid container spacing={3}>
@@ -169,14 +189,14 @@ function Registration() {
               )}
             />
           </Grid>
-          <Grid item xs={12}>
+          <Grid item xs={12}><br />
             <Button
               variant="contained"
-              color="primary"
+              color="colorb"
               type="submit"
               disabled={isLoading}
             >
-              Registration
+              Регистрация
             </Button>
             <Button
               color="inherit"
@@ -190,7 +210,24 @@ function Registration() {
           </Grid>
         </Grid>
       </form>
-    </Container>
+    </Container></Paper><br /><br /><br /><br /><br />
+    <footer><Paper elevation={8}
+      sx={{ 
+        pl:5,
+       
+        margin: 'auto',
+        maxWidth:'auto',
+        flexGrow: 1,
+        backgroundColor: colorb,
+      }}
+    >
+    <Box sx={{ width: '100%', maxWidth: 700, margin: 'auto', textAlign: 'center'  }}>
+     <br /> <br /><Typography variant="h6"  gutterBottom>
+      ТИНОСТУДИЯ 2023 (видео-хостинг) | Made by <a href="https://github.com/SquirrelBELKA"   > SquirrelBELKA</a> 
+            
+      </Typography><br /> 
+     </Box></Paper>
+     </footer></div>
   );
 }
 
