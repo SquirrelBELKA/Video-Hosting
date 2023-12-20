@@ -11,7 +11,7 @@ import Typography from "@mui/material/Typography";
 import PropTypes from "prop-types";
 import Box from '@mui/material/Box';
 import { red, grey, indigo } from '@mui/material/colors';
- 
+import CssBaseline from '@material-ui/core/CssBaseline';
 
  
 const colorr = red[300];
@@ -28,42 +28,59 @@ const colorw = '#FAFAFA';
 
 const Img = styled('img')({
   margin: 'auto',
-  display: 'block',
+ 
   maxWidth: '100%',
   maxHeight: '100%',
 });
+const useStyles = makeStyles({
+paper: {
+  width: '100%',
+  height: '100%',
+  
+},
+root: {
+  backgroundColor: colorb,
+  height: '100vh',
+},
+});
 
-/*background {{
-  background: colorb
-}}*/
+
 
 function Home() {
-  
+  const classes = useStyles();
   return (
     
-    <div style={{backgroundColor: colorb}}   ><br /><br />
-    <Paper elevation={7}
+    <div style={{backgroundColor: colorb}}  height= '100vh'> <br /><br />
+    
+
+   
+      
+      <br /><br /> <CssBaseline />
+    <Paper elevation={7}  
       sx={{ 
         p: 2.5,
-        
-        margin: 'auto',
         maxWidth:1200,
+        width: "100%",
+        
+        height: '100%',
+        margin: 'auto',
+        
         flexGrow: 1,
         backgroundColor: colorb
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={1} >
+        <Grid item xs={12} sm={6} >
         
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
-            <Grid item xs>
+        
             <br /><br /><br /><br />
-              <Typography gutterBottom variant="h2"color='#F2A548' component="div">
+            <Grid item xs paddingLeft={2}  >
+              <Typography gutterBottom variant="h2"color='#F2A548'  >
               Вдохновение 
               </Typography>
-              <Typography gutterBottom variant="h2" color='#F7DC4E'component="div">
+              <Typography gutterBottom variant="h2" color='#F7DC4E'>
                 Развлечение
-              </Typography><Typography gutterBottom variant="h2" color='#FAFAFA' component="div">
+              </Typography><Typography gutterBottom variant="h2" color='#FAFAFA' >
                 Сообщество 
               </Typography>
               
@@ -82,33 +99,37 @@ function Home() {
             </Button>
             </Grid>
             </Grid>
+        </Grid>
+        <Grid item xs={12} sm={6}>
+        <Grid item xs >
+            <br /><br /><br /><br />
+        <Img  src="https://ibb.org.ru/images/2023/12/05/SNIMOK-EKRANA-2023-12-05-20233593f8cf70abcdf4e8.jpg" />
+        </Grid></Grid>
+         <Grid item xs={12} sm={8}>
+          </Grid></Grid>
+          </Paper>
 
-            
-          </Grid>
-          
-          <Grid item>
-          <ButtonBase sx={{ width: 700, height: 600 }}>
-            <Img  src="https://ibb.org.ru/images/2023/12/05/SNIMOK-EKRANA-2023-12-05-20233593f8cf70abcdf4e8.jpg" />
-          </ButtonBase>
-        </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
-    <br /><br />
-    <Paper elevation={7}
+
+          <br /><br />
+      <br /><br /> <CssBaseline />
+    <Paper elevation={7}  
       sx={{ 
         p: 2.5,
-        
-        margin: 'auto',
         maxWidth:1200,
+        width: "100%",
+        
+        height: '100%',
+        margin: 'auto',
+        
         flexGrow: 1,
         backgroundColor: colorb
       }}
     >
-      <Grid container spacing={2}>
+      <Grid container spacing={1} >
+        <Grid item xs={12} sm={6} >
         
-        <Grid item xs={12} sm container>
-          <Grid item xs container direction="column" spacing={2}>
+        
+        <Grid item xs container direction="column" spacing={2}>
             <Grid item xs>
               <Typography gutterBottom variant="h2" color='#F2A548' component="div">
                 Публикуй и <n>комментируй</n>
@@ -126,22 +147,16 @@ function Home() {
               </Typography>
             </Grid>
            
-          </Grid>
+          </Grid></Grid>
+           
           
-          <Grid item>
-          <ButtonBase sx={{ width: 700, height: 600 }}>
+        <Grid item xs={12} sm={6}>
+        <Grid item>
+          <ButtonBase>
             <Img  src="https://ibb.org.ru/images/2023/12/05/SNIMOK-EKRANA-2023-12-05-211655db0863a9e8e1047f.jpg" width={700} height={600} />
           </ButtonBase>
-        </Grid>
-        </Grid>
-      </Grid>
-    </Paper>
-
-   
-      <br /><br />
-      
-      
-      
+        </Grid></Grid></Grid>
+          </Paper>
 
 
     <br />  <br /> <br /><br />  <br /> 
@@ -154,14 +169,14 @@ function Home() {
 
     
       
-        <Paper elevation={8}
+        <Paper elevation={8} 
       sx={{ 
         pl:5,
        
         margin: 'auto',
         maxWidth:'auto',
         flexGrow: 1,
-        backgroundColor: 'write',
+        backgroundColor: '#232323',
       }}
     >
       
@@ -186,17 +201,17 @@ function Home() {
       </Typography><br /> 
      </Box></Paper>
      </footer>
-      
+     </div>
     
      
     
     
      
-    </div>
+    
     
     
   );
 }
-//variant="subtitle1"
+
 export default Home;
 
